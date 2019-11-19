@@ -2,10 +2,10 @@ import React, { useEffect, useContext } from "react";
 import { Formik, Form, Field } from "formik";
 import history from "../history";
 import { SignInService } from "../services/SignInService";
-import { LoginContext } from "../contexts/LogInContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Login = () => {
-  const { authState, setLoggedInState } = useContext(LoginContext);
+  const { authState, setLoggedInState } = useContext(AuthContext);
   const { isLoggedIn } = authState;
 
   useEffect(() => {
