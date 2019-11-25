@@ -2,12 +2,13 @@ import React, { useEffect, useContext } from "react";
 import { Formik, Form, Field } from "formik";
 import history from "../history";
 import { SignInService } from "../services/SignInService";
-import { LoginContext } from "../contexts/LogInContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Login = () => {
-  const { authState, setLoggedInState } = useContext(LoginContext);
-  const { isLoggedIn } = authState;
-
+  const context = useContext(AuthContext);
+  console.log(context);
+  const isLoggedIn = context.authState ? context.authState.isLoggedIn : false;
+  console.log(isLoggedIn);
   useEffect(() => {
     if (isLoggedIn) {
       history.push("/Home");
@@ -19,7 +20,7 @@ const Login = () => {
       const response = await SignInService(values);
 
       if (response.status === 200) {
-        setLoggedInState();
+        context.setLoggedInState();
       } else {
         alert(response);
       }
